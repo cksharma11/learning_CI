@@ -23,7 +23,14 @@ cd $REPO_NAME
 
 while true; do
   clear
-  mocha --reporter min
+  mocha --reporter min > ./.mocha_data
+  echo -e "${GREEN}-------------------------"
+  echo "Mocha is running in every 5 seconds"
+  echo -e "${GREEN}Total Passing Tests : "
+  cat ./.mocha_data | grep pass
+  echo -e "${RED}Total failing Tests : "
+  cat ./.mocha_data | grep fail
+  echo -e "${GREEN}-------------------------"
   sleep $CI_INTERVAL
   git pull > /dev/null
 done
